@@ -60,6 +60,7 @@ async def addchar(interaction: discord.Interaction, character: str):
         save_data()
         await interaction.response.send_message(f"➕ '{character}' 추가됨", ephemeral=True)
 
+
 # 보스 추가
 @tree.command(name="addboss", description="캐릭터에 보스를 추가합니다")
 @app_commands.describe(character="캐릭터 이름", boss="보스 이름")
