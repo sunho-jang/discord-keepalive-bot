@@ -1,10 +1,13 @@
 import firebase_admin
 from firebase_admin import credentials, db
+import json
+import os
 
-# JSON 키 파일 경로
-cred = credentials.Certificate("serviceAccountKey.json")
+# 환경 변수에서 JSON 문자열을 가져옴
+firebase_key_str = os.environ.get("FIREBASE_KEY_JSON")
+firebase_key_dict = json.loads(firebase_key_str)
 
-# Firebase 초기화 (Realtime Database URL은 자신의 DB URL로 바꿔줘야 해)
+cred = credentials.Certificate(firebase_key_dict)
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://discord-bot-data-58877-default-rtdb.asia-southeast1.firebasedatabase.app/'  # 너의 주소로 바꿔
+    'databaseURL': 'https://discord-bot-data-58877-default-rtdb.asia-southeast1.firebasedatabase.app'
 })
