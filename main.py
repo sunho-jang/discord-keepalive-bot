@@ -47,9 +47,17 @@ async def weekly_reset():
 @bot.event
 async def on_ready():
     load_data()
-    await tree.sync()
     weekly_reset.start()
-    print(f'Logged in as {bot.user}')
+    
+    for guild in bot.guilds:
+        try:
+            await tree.sync(guild=guild)
+            print(f"✅ Synced commands for {guild.name}")
+        except Exception as e:
+            print(f"❌ Failed to sync for {guild.name}: {e}")
+
+    print(f'🟢 Logged in as {bot.user}')
+
 
 @tree.command(name="add", description="캐릭터를 추가합니다.")
 async def add_character(interaction: discord.Interaction, character: str):
