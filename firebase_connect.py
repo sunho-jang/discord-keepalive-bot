@@ -1,13 +1,10 @@
 import firebase_admin
 from firebase_admin import credentials, db
-import json
-import os
 
-# 환경 변수에서 JSON 문자열을 가져옴
-firebase_key_str = os.environ.get("FIREBASE_KEY_JSON")
-firebase_key_dict = json.loads(firebase_key_str)
+# Secret File 방식으로 Firebase 인증 파일 로드
+cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
 
-cred = credentials.Certificate(firebase_key_dict)
+# Firebase 앱 초기화
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://discord-bot-data-58877-default-rtdb.asia-southeast1.firebasedatabase.app'
 })
