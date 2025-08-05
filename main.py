@@ -164,5 +164,15 @@ async def check_all_status(interaction: discord.Interaction):
 
     await interaction.followup.send(embed=embed, ephemeral=True)
 
+
+if "TOKEN" not in os.environ:
+    print("❌ TOKEN 환경변수가 없습니다.")
+else:
+    print("✅ TOKEN 환경변수 존재함, 로그인 시도 중...")
+
+
+
 keep_alive()
 bot.run(os.environ['TOKEN'])
+
+
